@@ -41,13 +41,17 @@
 			this.textBoxCommentary = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
 			this.linkLabelOpenFolder = new System.Windows.Forms.LinkLabel();
+			this.buttonDeleteCase = new System.Windows.Forms.Button();
+			this.label6 = new System.Windows.Forms.Label();
+			this.label7 = new System.Windows.Forms.Label();
+			this.labelLastModifyInfo = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label1.Location = new System.Drawing.Point(42, 87);
+			this.label1.Location = new System.Drawing.Point(42, 54);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(146, 16);
 			this.label1.TabIndex = 0;
@@ -57,7 +61,7 @@
 			// 
 			this.label2.AutoSize = true;
 			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label2.Location = new System.Drawing.Point(42, 127);
+			this.label2.Location = new System.Drawing.Point(42, 94);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(219, 16);
 			this.label2.TabIndex = 1;
@@ -67,7 +71,7 @@
 			// 
 			this.label3.AutoSize = true;
 			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label3.Location = new System.Drawing.Point(42, 229);
+			this.label3.Location = new System.Drawing.Point(42, 196);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(155, 16);
 			this.label3.TabIndex = 2;
@@ -77,7 +81,7 @@
 			// 
 			this.label4.AutoSize = true;
 			this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label4.Location = new System.Drawing.Point(42, 173);
+			this.label4.Location = new System.Drawing.Point(42, 140);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(92, 16);
 			this.label4.TabIndex = 3;
@@ -85,7 +89,7 @@
 			// 
 			// buttonChooseFolder
 			// 
-			this.buttonChooseFolder.Location = new System.Drawing.Point(293, 226);
+			this.buttonChooseFolder.Location = new System.Drawing.Point(293, 193);
 			this.buttonChooseFolder.Name = "buttonChooseFolder";
 			this.buttonChooseFolder.Size = new System.Drawing.Size(253, 23);
 			this.buttonChooseFolder.TabIndex = 4;
@@ -99,16 +103,16 @@
 			this.comboBoxCaseStatus.FormattingEnabled = true;
 			this.comboBoxCaseStatus.Items.AddRange(new object[] {
             "В работе",
-            "Готов к показу",
+            "Готово к показу",
             "В архиве"});
-			this.comboBoxCaseStatus.Location = new System.Drawing.Point(293, 173);
+			this.comboBoxCaseStatus.Location = new System.Drawing.Point(293, 140);
 			this.comboBoxCaseStatus.Name = "comboBoxCaseStatus";
 			this.comboBoxCaseStatus.Size = new System.Drawing.Size(253, 21);
 			this.comboBoxCaseStatus.TabIndex = 5;
 			// 
 			// dateTimePickerExpirationDate
 			// 
-			this.dateTimePickerExpirationDate.Location = new System.Drawing.Point(293, 131);
+			this.dateTimePickerExpirationDate.Location = new System.Drawing.Point(293, 98);
 			this.dateTimePickerExpirationDate.Name = "dateTimePickerExpirationDate";
 			this.dateTimePickerExpirationDate.Size = new System.Drawing.Size(253, 20);
 			this.dateTimePickerExpirationDate.TabIndex = 6;
@@ -116,14 +120,14 @@
 			// 
 			// textBoxWorkerName
 			// 
-			this.textBoxWorkerName.Location = new System.Drawing.Point(293, 87);
+			this.textBoxWorkerName.Location = new System.Drawing.Point(293, 54);
 			this.textBoxWorkerName.Name = "textBoxWorkerName";
 			this.textBoxWorkerName.Size = new System.Drawing.Size(253, 20);
 			this.textBoxWorkerName.TabIndex = 7;
 			// 
 			// buttonSaveChanges
 			// 
-			this.buttonSaveChanges.Location = new System.Drawing.Point(120, 404);
+			this.buttonSaveChanges.Location = new System.Drawing.Point(240, 415);
 			this.buttonSaveChanges.Name = "buttonSaveChanges";
 			this.buttonSaveChanges.Size = new System.Drawing.Size(125, 23);
 			this.buttonSaveChanges.TabIndex = 8;
@@ -133,16 +137,17 @@
 			// 
 			// buttonCloseManager
 			// 
-			this.buttonCloseManager.Location = new System.Drawing.Point(361, 404);
+			this.buttonCloseManager.Location = new System.Drawing.Point(421, 415);
 			this.buttonCloseManager.Name = "buttonCloseManager";
 			this.buttonCloseManager.Size = new System.Drawing.Size(125, 23);
 			this.buttonCloseManager.TabIndex = 9;
 			this.buttonCloseManager.Text = "Закрыть";
 			this.buttonCloseManager.UseVisualStyleBackColor = true;
+			this.buttonCloseManager.Click += new System.EventHandler(this.buttonCloseManager_Click);
 			// 
 			// textBoxCommentary
 			// 
-			this.textBoxCommentary.Location = new System.Drawing.Point(293, 307);
+			this.textBoxCommentary.Location = new System.Drawing.Point(293, 262);
 			this.textBoxCommentary.Multiline = true;
 			this.textBoxCommentary.Name = "textBoxCommentary";
 			this.textBoxCommentary.Size = new System.Drawing.Size(253, 68);
@@ -152,7 +157,7 @@
 			// 
 			this.label5.AutoSize = true;
 			this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label5.Location = new System.Drawing.Point(42, 307);
+			this.label5.Location = new System.Drawing.Point(42, 262);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(100, 16);
 			this.label5.TabIndex = 10;
@@ -161,19 +166,63 @@
 			// linkLabelOpenFolder
 			// 
 			this.linkLabelOpenFolder.AutoSize = true;
-			this.linkLabelOpenFolder.Location = new System.Drawing.Point(374, 252);
+			this.linkLabelOpenFolder.Location = new System.Drawing.Point(374, 219);
 			this.linkLabelOpenFolder.Name = "linkLabelOpenFolder";
 			this.linkLabelOpenFolder.Size = new System.Drawing.Size(92, 13);
 			this.linkLabelOpenFolder.TabIndex = 12;
 			this.linkLabelOpenFolder.TabStop = true;
 			this.linkLabelOpenFolder.Text = "Перейти к папке";
+			this.linkLabelOpenFolder.Visible = false;
 			this.linkLabelOpenFolder.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelOpenFolder_LinkClicked);
+			// 
+			// buttonDeleteCase
+			// 
+			this.buttonDeleteCase.Location = new System.Drawing.Point(45, 415);
+			this.buttonDeleteCase.Name = "buttonDeleteCase";
+			this.buttonDeleteCase.Size = new System.Drawing.Size(125, 23);
+			this.buttonDeleteCase.TabIndex = 13;
+			this.buttonDeleteCase.Text = "Удалить запись";
+			this.buttonDeleteCase.UseVisualStyleBackColor = true;
+			this.buttonDeleteCase.Click += new System.EventHandler(this.buttonDeleteCase_Click);
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(0, 0);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(35, 13);
+			this.label6.TabIndex = 14;
+			this.label6.Text = "label6";
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label7.Location = new System.Drawing.Point(42, 374);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(160, 16);
+			this.label7.TabIndex = 15;
+			this.label7.Text = "Последнее изменение:";
+			// 
+			// labelLastModifyInfo
+			// 
+			this.labelLastModifyInfo.AutoSize = true;
+			this.labelLastModifyInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelLastModifyInfo.Location = new System.Drawing.Point(237, 374);
+			this.labelLastModifyInfo.Name = "labelLastModifyInfo";
+			this.labelLastModifyInfo.Size = new System.Drawing.Size(11, 16);
+			this.labelLastModifyInfo.TabIndex = 16;
+			this.labelLastModifyInfo.Text = "l";
 			// 
 			// FormManagement
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(603, 474);
+			this.Controls.Add(this.labelLastModifyInfo);
+			this.Controls.Add(this.label7);
+			this.Controls.Add(this.label6);
+			this.Controls.Add(this.buttonDeleteCase);
 			this.Controls.Add(this.linkLabelOpenFolder);
 			this.Controls.Add(this.textBoxCommentary);
 			this.Controls.Add(this.label5);
@@ -210,6 +259,10 @@
 		private System.Windows.Forms.TextBox textBoxCommentary;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.LinkLabel linkLabelOpenFolder;
+		private System.Windows.Forms.Button buttonDeleteCase;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.Label labelLastModifyInfo;
 	}
 }
 

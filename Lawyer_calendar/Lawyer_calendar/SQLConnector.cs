@@ -1,8 +1,9 @@
-﻿using MySql.Data.MySqlClient;
+﻿using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace Lawyer_calendar
 {
-	internal static class SqlConnector
+	internal class SqlConnector
 	{
 		private static MySqlConnection connector = null;
 		public static MySqlConnection Connector { get; }
@@ -18,10 +19,20 @@ namespace Lawyer_calendar
 			}
 		}
 
-		public static bool SqlOperation(string commandString)
+		public static bool SqlInsertUpdateDelete(string commandString)
 		{
 			MySqlCommand mySqlCommand = new MySqlCommand(commandString, connector);
 			return mySqlCommand.ExecuteNonQuery() > 0;
+		}
+
+		public static DataTable ConvertQueryToDataTable(string sqlRequest)
+		{
+			MySqlDataAdapter sqlAdapter = new MySqlDataAdapter(sqlRequest, connector);
+			DataSet dataSet = new DataSet();
+
+			sqlAdapter.Fill(dataSet);
+			return dataSet.Tables[0];
+
 		}
 	}
 }

@@ -219,6 +219,7 @@
 			// flowLayoutPanel2
 			// 
 			this.flowLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
 			this.flowLayoutPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.flowLayoutPanel2.Controls.Add(this.label8);
 			this.flowLayoutPanel2.Controls.Add(this.linkLabel1);
