@@ -2,11 +2,21 @@
 using System.Windows.Forms;
 using System.Threading;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace Lawyer_calendar
 {
 	public partial class FormManagement : Form
 	{
+		//private readonly Dictionary<string, string> userNamesDict = new Dictionary<string, string> 
+		//{
+		//	{"", ""},
+		//	{"", ""},
+		//	{"", ""},
+		//	{"", ""}
+		//};
+
+
 		public FormManagement(DateTime chosenDate)
 		{
 			InitializeComponent();
@@ -99,11 +109,7 @@ namespace Lawyer_calendar
 
 				}
 			}
-			
 		}
-
-		
-	
 
 		private void buttonChooseFolder_Click(object sender, EventArgs e)
 		{
@@ -124,16 +130,34 @@ namespace Lawyer_calendar
 			LegalCase singleCase = new LegalCase();
 			singleCase.WorkerName = textBoxWorkerName.Text;
 			singleCase.ExpirationDate = dateTimePickerExpirationDate.Value;
-			singleCase.CaseStatusInt = comboBoxCaseStatus.SelectedIndex;
+			singleCase.CaseStatusStr = comboBoxCaseStatus.SelectedItem.ToString();
 			singleCase.PathToDir = pathToDirectory.Replace("\\", "\\\\");
 			singleCase.Commentary = textBoxCommentary.Text;
 			singleCase.LastModifyDate = DateTime.Today;
 			singleCase.LastModifyName = Environment.UserName;
+			//singleCase.LastModifyName = GetUserNameDict(Environment.UserName);
 
 			return singleCase;
 		}
 
 		
+		//private string GetUserNameDict(string dnsName)
+		//{
+		//	dnsName = dnsName.Trim();
+		//	string fullName = "";
+		//	foreach(KeyValuePair<string, string> pair in userNamesDict)
+		//	{
+		//		if(dnsName == pair.Key)
+		//		{
+		//			fullName = pair.Value;
+		//		}
+		//	}
+
+		//	if (fullName == "")
+		//		return dnsName;
+		//	else
+		//		return fullName;
+		//}
 
 		private void linkLabelOpenFolder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
@@ -141,18 +165,22 @@ namespace Lawyer_calendar
 				Process.Start(pathToDirectory);
 		}
 
-		
-
-		
-
 		private bool IsConfirm(string message)
 		{
 			return MessageBox.Show(message, "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
 		}
+
 		private void buttonCloseManager_Click(object sender, EventArgs e)
 		{
 			this.Close();
 		}
 
+		private void buttonShowChronology_Click(object sender, EventArgs e)
+		{
+			using (FormCaseChronology form = new FormCaseChronology(CaseId))
+			{
+				form.ShowDialog();
+			}
+		}
 	}
 }

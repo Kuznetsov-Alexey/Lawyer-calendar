@@ -42,9 +42,10 @@
 			this.label5 = new System.Windows.Forms.Label();
 			this.linkLabelOpenFolder = new System.Windows.Forms.LinkLabel();
 			this.buttonDeleteCase = new System.Windows.Forms.Button();
-			this.label6 = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
 			this.labelLastModifyInfo = new System.Windows.Forms.Label();
+			this.buttonShowChronology = new System.Windows.Forms.Button();
+			this.label6 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -127,7 +128,7 @@
 			// 
 			// buttonSaveChanges
 			// 
-			this.buttonSaveChanges.Location = new System.Drawing.Point(240, 415);
+			this.buttonSaveChanges.Location = new System.Drawing.Point(240, 474);
 			this.buttonSaveChanges.Name = "buttonSaveChanges";
 			this.buttonSaveChanges.Size = new System.Drawing.Size(125, 23);
 			this.buttonSaveChanges.TabIndex = 8;
@@ -137,7 +138,7 @@
 			// 
 			// buttonCloseManager
 			// 
-			this.buttonCloseManager.Location = new System.Drawing.Point(421, 415);
+			this.buttonCloseManager.Location = new System.Drawing.Point(421, 474);
 			this.buttonCloseManager.Name = "buttonCloseManager";
 			this.buttonCloseManager.Size = new System.Drawing.Size(125, 23);
 			this.buttonCloseManager.TabIndex = 9;
@@ -147,7 +148,7 @@
 			// 
 			// textBoxCommentary
 			// 
-			this.textBoxCommentary.Location = new System.Drawing.Point(293, 262);
+			this.textBoxCommentary.Location = new System.Drawing.Point(293, 321);
 			this.textBoxCommentary.Multiline = true;
 			this.textBoxCommentary.Name = "textBoxCommentary";
 			this.textBoxCommentary.Size = new System.Drawing.Size(253, 68);
@@ -157,7 +158,7 @@
 			// 
 			this.label5.AutoSize = true;
 			this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label5.Location = new System.Drawing.Point(42, 262);
+			this.label5.Location = new System.Drawing.Point(42, 321);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(100, 16);
 			this.label5.TabIndex = 10;
@@ -177,7 +178,7 @@
 			// 
 			// buttonDeleteCase
 			// 
-			this.buttonDeleteCase.Location = new System.Drawing.Point(45, 415);
+			this.buttonDeleteCase.Location = new System.Drawing.Point(45, 474);
 			this.buttonDeleteCase.Name = "buttonDeleteCase";
 			this.buttonDeleteCase.Size = new System.Drawing.Size(125, 23);
 			this.buttonDeleteCase.TabIndex = 13;
@@ -185,20 +186,11 @@
 			this.buttonDeleteCase.UseVisualStyleBackColor = true;
 			this.buttonDeleteCase.Click += new System.EventHandler(this.buttonDeleteCase_Click);
 			// 
-			// label6
-			// 
-			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(0, 0);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(35, 13);
-			this.label6.TabIndex = 14;
-			this.label6.Text = "label6";
-			// 
 			// label7
 			// 
 			this.label7.AutoSize = true;
 			this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label7.Location = new System.Drawing.Point(42, 374);
+			this.label7.Location = new System.Drawing.Point(42, 433);
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(160, 16);
 			this.label7.TabIndex = 15;
@@ -208,20 +200,41 @@
 			// 
 			this.labelLastModifyInfo.AutoSize = true;
 			this.labelLastModifyInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelLastModifyInfo.Location = new System.Drawing.Point(237, 374);
+			this.labelLastModifyInfo.Location = new System.Drawing.Point(237, 433);
 			this.labelLastModifyInfo.Name = "labelLastModifyInfo";
 			this.labelLastModifyInfo.Size = new System.Drawing.Size(11, 16);
 			this.labelLastModifyInfo.TabIndex = 16;
 			this.labelLastModifyInfo.Text = "l";
 			// 
+			// buttonShowChronology
+			// 
+			this.buttonShowChronology.Location = new System.Drawing.Point(293, 263);
+			this.buttonShowChronology.Name = "buttonShowChronology";
+			this.buttonShowChronology.Size = new System.Drawing.Size(253, 23);
+			this.buttonShowChronology.TabIndex = 18;
+			this.buttonShowChronology.Text = "Посмотреть хронологию";
+			this.buttonShowChronology.UseVisualStyleBackColor = true;
+			this.buttonShowChronology.Click += new System.EventHandler(this.buttonShowChronology_Click);
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label6.Location = new System.Drawing.Point(42, 266);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(123, 16);
+			this.label6.TabIndex = 17;
+			this.label6.Text = "Хронология дела:";
+			// 
 			// FormManagement
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(603, 474);
+			this.ClientSize = new System.Drawing.Size(603, 533);
+			this.Controls.Add(this.buttonShowChronology);
+			this.Controls.Add(this.label6);
 			this.Controls.Add(this.labelLastModifyInfo);
 			this.Controls.Add(this.label7);
-			this.Controls.Add(this.label6);
 			this.Controls.Add(this.buttonDeleteCase);
 			this.Controls.Add(this.linkLabelOpenFolder);
 			this.Controls.Add(this.textBoxCommentary);
@@ -260,9 +273,10 @@
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.LinkLabel linkLabelOpenFolder;
 		private System.Windows.Forms.Button buttonDeleteCase;
-		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.Label labelLastModifyInfo;
+		private System.Windows.Forms.Button buttonShowChronology;
+		private System.Windows.Forms.Label label6;
 	}
 }
 

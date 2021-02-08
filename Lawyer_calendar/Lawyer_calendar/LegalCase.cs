@@ -28,9 +28,8 @@ namespace Lawyer_calendar
 			this.LastModifyName = dataRow["LastModifyName"].ToString();
 			this.LastModifyDate = (DateTime)dataRow["LastModifyDate"];
 		}
+
 		public LegalCase() { }
-
-
 
 		public string WorkerName { get; set; }		
 
@@ -53,31 +52,6 @@ namespace Lawyer_calendar
 
 		private CaseStatus caseStatus { get; set; }
 
-		public int CaseStatusInt
-		{
-			set
-			{
-				switch (value)
-				{
-					case 0:
-						caseStatus = CaseStatus.InWork;
-						break;
-
-					case 1:
-						caseStatus = CaseStatus.Ready;
-						break;
-
-					case 2:
-						caseStatus = CaseStatus.InArchive;
-						break;
-
-					default:
-						caseStatus = CaseStatus.NoStatus;
-						break;
-				}
-			}
-		}
-
 		public string CaseStatusStr
 		{
 			get
@@ -95,6 +69,27 @@ namespace Lawyer_calendar
 						
 				}
 				return "Нет статуса";
+			}
+			set
+			{
+				switch (value)
+				{
+					case "В работе":
+						caseStatus = CaseStatus.InWork;
+						break;
+
+					case "Готово к показу":
+						caseStatus = CaseStatus.Ready;
+						break;
+
+					case "В архиве":
+						caseStatus = CaseStatus.InArchive;
+						break;
+
+					default:
+						caseStatus = CaseStatus.NoStatus;
+						break;
+				}
 			}
 		}
 
