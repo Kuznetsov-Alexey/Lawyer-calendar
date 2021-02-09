@@ -8,6 +8,7 @@ namespace Lawyer_calendar
 {
 	public partial class FormManagement : Form
 	{
+		#region Dictionary Searching
 		//private readonly Dictionary<string, string> userNamesDict = new Dictionary<string, string> 
 		//{
 		//	{"", ""},
@@ -15,6 +16,25 @@ namespace Lawyer_calendar
 		//	{"", ""},
 		//	{"", ""}
 		//};
+
+		//private string GetUserNameDict(string dnsName)
+		//{
+		//	dnsName = dnsName.Trim();
+		//	string fullName = "";
+		//	foreach(KeyValuePair<string, string> pair in userNamesDict)
+		//	{
+		//		if(dnsName == pair.Key)
+		//		{
+		//			fullName = pair.Value;
+		//		}
+		//	}
+
+		//	if (fullName == "")
+		//		return dnsName;
+		//	else
+		//		return fullName;
+		//}
+		#endregion
 
 
 		public FormManagement(DateTime chosenDate)
@@ -28,18 +48,12 @@ namespace Lawyer_calendar
 
 		private void FormManagement_Load(object sender, EventArgs e)
 		{
-			try
-			{
-				SqlConnector.SqlConnect();
-			}
-			catch(Exception ex)
-			{
-				MessageBox.Show("Connect error\n" + ex.Message);
-			}
+			
 		}
 
 		public void SetFormValues(LegalCase legalCase, string caseStatus)
 		{
+			this.Text = LegalCase.GetShortDirName(legalCase.PathToDir);
 			this.textBoxWorkerName.Text = legalCase.WorkerName;
 			this.dateTimePickerExpirationDate.Value = (DateTime)legalCase.ExpirationDate;
 			this.comboBoxCaseStatus.SelectedItem = caseStatus;
@@ -48,6 +62,7 @@ namespace Lawyer_calendar
 			this.linkLabelOpenFolder.Visible = true;
 			this.labelLastModifyInfo.Text = legalCase.LastModifyName + "    :    " + legalCase.LastModifyDate.ToShortDateString();
 		}
+
 		private void buttonDeleteCase_Click(object sender, EventArgs e)
 		{
 			if (IsConfirm("Удалить выбранную запись"))
@@ -66,7 +81,7 @@ namespace Lawyer_calendar
 
 		private void buttonSaveChanges_Click(object sender, EventArgs e)
 		{
-			LegalCase singleCase = SetCaseValues();
+			LegalCase singleCase = GetCaseValues();
 
 			if(string.IsNullOrEmpty(pathToDirectory))
 			{
@@ -125,7 +140,7 @@ namespace Lawyer_calendar
 			}
 		}
 
-		private LegalCase SetCaseValues()
+		private LegalCase GetCaseValues()
 		{
 			LegalCase singleCase = new LegalCase();
 			singleCase.WorkerName = textBoxWorkerName.Text;
@@ -139,25 +154,6 @@ namespace Lawyer_calendar
 
 			return singleCase;
 		}
-
-		
-		//private string GetUserNameDict(string dnsName)
-		//{
-		//	dnsName = dnsName.Trim();
-		//	string fullName = "";
-		//	foreach(KeyValuePair<string, string> pair in userNamesDict)
-		//	{
-		//		if(dnsName == pair.Key)
-		//		{
-		//			fullName = pair.Value;
-		//		}
-		//	}
-
-		//	if (fullName == "")
-		//		return dnsName;
-		//	else
-		//		return fullName;
-		//}
 
 		private void linkLabelOpenFolder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
@@ -177,9 +173,11 @@ namespace Lawyer_calendar
 
 		private void buttonShowChronology_Click(object sender, EventArgs e)
 		{
-			using (FormCaseChronology form = new FormCaseChronology(CaseId))
+			using (FormCaseChronology form = new FormCaseChronology(CaseId, this.Text))
 			{
+				this.Visible = false;
 				form.ShowDialog();
+				this.Visible = true;
 			}
 		}
 	}

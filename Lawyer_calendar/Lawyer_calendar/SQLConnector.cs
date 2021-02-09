@@ -19,6 +19,11 @@ namespace Lawyer_calendar
 			}
 		}
 
+		~SqlConnector()
+		{
+			connector.Close();
+		}
+
 		public static bool SqlInsertUpdateDelete(string commandString)
 		{
 			MySqlCommand mySqlCommand = new MySqlCommand(commandString, connector);

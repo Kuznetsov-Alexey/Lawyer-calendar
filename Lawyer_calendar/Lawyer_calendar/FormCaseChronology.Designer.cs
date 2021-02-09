@@ -30,8 +30,8 @@
 		{
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.buttonAddEvent = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
-			this.button3 = new System.Windows.Forms.Button();
+			this.buttonSaveChanges = new System.Windows.Forms.Button();
+			this.buttonDeleteEvent = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -42,6 +42,7 @@
 			this.dataGridView1.Name = "dataGridView1";
 			this.dataGridView1.Size = new System.Drawing.Size(597, 337);
 			this.dataGridView1.TabIndex = 0;
+			this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.FormCaseChronology_CellValueChanged);
 			// 
 			// buttonAddEvent
 			// 
@@ -54,48 +55,51 @@
 			this.buttonAddEvent.UseVisualStyleBackColor = true;
 			this.buttonAddEvent.Click += new System.EventHandler(this.buttonAddEvent_Click);
 			// 
-			// button2
+			// buttonSaveChanges
 			// 
-			this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.button2.Location = new System.Drawing.Point(258, 374);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(121, 39);
-			this.button2.TabIndex = 2;
-			this.button2.Text = "Сохранить";
-			this.button2.UseVisualStyleBackColor = true;
+			this.buttonSaveChanges.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonSaveChanges.Location = new System.Drawing.Point(258, 374);
+			this.buttonSaveChanges.Name = "buttonSaveChanges";
+			this.buttonSaveChanges.Size = new System.Drawing.Size(121, 39);
+			this.buttonSaveChanges.TabIndex = 2;
+			this.buttonSaveChanges.Text = "Сохранить";
+			this.buttonSaveChanges.UseVisualStyleBackColor = true;
+			this.buttonSaveChanges.Click += new System.EventHandler(this.buttonSaveChanges_Click);
 			// 
-			// button3
+			// buttonDeleteEvent
 			// 
-			this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.button3.Location = new System.Drawing.Point(472, 374);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(121, 39);
-			this.button3.TabIndex = 3;
-			this.button3.Text = "Удалить";
-			this.button3.UseVisualStyleBackColor = true;
+			this.buttonDeleteEvent.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonDeleteEvent.Location = new System.Drawing.Point(472, 374);
+			this.buttonDeleteEvent.Name = "buttonDeleteEvent";
+			this.buttonDeleteEvent.Size = new System.Drawing.Size(121, 39);
+			this.buttonDeleteEvent.TabIndex = 3;
+			this.buttonDeleteEvent.Text = "Удалить";
+			this.buttonDeleteEvent.UseVisualStyleBackColor = true;
+			this.buttonDeleteEvent.Click += new System.EventHandler(this.buttonDeleteEvent_Click);
+			
 			// 
 			// FormCaseChronology
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(621, 436);
-			this.Controls.Add(this.button3);
-			this.Controls.Add(this.button2);
+			this.Controls.Add(this.buttonDeleteEvent);
+			this.Controls.Add(this.buttonSaveChanges);
 			this.Controls.Add(this.buttonAddEvent);
 			this.Controls.Add(this.dataGridView1);
 			this.Name = "FormCaseChronology";
-			this.Text = "FormCaseChronologyView";
-			this.Load += new System.EventHandler(this.FormCaseChronology_Load);
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+			this.Text = "FormCaseChronologyView";			
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
-
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormCaseChronology_Closing);
 		}
 
 		#endregion
 
 		private System.Windows.Forms.DataGridView dataGridView1;
 		private System.Windows.Forms.Button buttonAddEvent;
-		private System.Windows.Forms.Button button2;
-		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.Button buttonSaveChanges;
+		private System.Windows.Forms.Button buttonDeleteEvent;
 	}
 }

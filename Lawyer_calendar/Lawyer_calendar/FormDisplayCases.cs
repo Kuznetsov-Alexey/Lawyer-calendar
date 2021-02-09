@@ -15,7 +15,15 @@ namespace Lawyer_calendar
 		public FormDisplayCases()
 		{
 			InitializeComponent();
-			SqlConnector.SqlConnect();
+
+			try
+			{
+				SqlConnector.SqlConnect();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Ошибка подключения к базе данных\n" + ex.Message);
+			}
 		}
 
 
@@ -29,7 +37,7 @@ namespace Lawyer_calendar
 			DisplayCurrentDate();
 		}
 
-		private void AddNewCase(object sender, EventArgs e)
+		private async void AddNewCase(object sender, EventArgs e)
 		{
 			FlowLayoutPanel senderPanel = (FlowLayoutPanel)sender;
 
@@ -37,15 +45,15 @@ namespace Lawyer_calendar
 			{
 				DateTime chosenDate = new DateTime(currentDate.Year, currentDate.Month, (int)senderPanel.Tag);
 
-				using (FormManagement formM = new FormManagement(chosenDate))
+				using (FormManagement form = new FormManagement(chosenDate))
 				{
-					formM.ShowDialog();
+					await Task.Run(() => form.ShowDialog());
 				}
 				DisplayCurrentDate();
 			}
 		}
 
-		private void ShowCaseDetails(object sender, EventArgs e)
+		private async void ShowCaseDetails(object sender, EventArgs e)
 		{
 			LinkLabel senderLabel = (LinkLabel)sender;
 			int caseID = (int)senderLabel.Tag;
@@ -65,7 +73,8 @@ namespace Lawyer_calendar
 				{
 					form.CaseId = (int)dataRow["ID"];
 					form.SetFormValues(legalCase, caseStatus);
-					form.ShowDialog();
+					
+					await Task.Run(() => form.ShowDialog());
 				}
 			}
 			DisplayCurrentDate();
@@ -93,7 +102,7 @@ namespace Lawyer_calendar
 				link.Tag = row["ID"];
 				link.Click += new System.EventHandler(this.ShowCaseDetails);
 
-				link.Text = GetShortNameOfDir(row["FolderAddress"].ToString());
+				link.Text = LegalCase.GetShortDirName(row["FolderAddress"].ToString());
 
 				listFlowDays[(caseDay.Day - 1) + (startDayInCalendar - 1)].Controls.Add(link);
 			}
@@ -214,12 +223,7 @@ namespace Lawyer_calendar
 			}
 		}
 
-		//обрезать строчку до имени каталога
-		private string GetShortNameOfDir(string pathToFolder)
-		{
-			string shortName = pathToFolder.Substring(pathToFolder.LastIndexOf("\\") + 1);
-			return shortName;
-		}
+		
 
 		private void buttonPreviousMonth_Click(object sender, EventArgs e)
 		{
@@ -254,6 +258,5 @@ namespace Lawyer_calendar
 			currentDate = DateTime.Today;
 			DisplayCurrentDate();
 		}
-
 	}
 }

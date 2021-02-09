@@ -17,16 +17,18 @@ namespace Lawyer_calendar
 	{
 		public LegalCase(DataRow dataRow)
 		{
-			//DateTime ExpirationDate = (DateTime)dataRow["ExpDate"];
-			//DateTime LastModifyDate = (DateTime)dataRow["LastModifyDate"];
-
-
 			this.PathToDir = dataRow["FolderAddress"].ToString();
 			this.WorkerName = dataRow["WorkerName"].ToString();
 			this.ExpirationDate = (DateTime)dataRow["ExpDate"];
 			this.Commentary = dataRow["Commentary"].ToString();
 			this.LastModifyName = dataRow["LastModifyName"].ToString();
 			this.LastModifyDate = (DateTime)dataRow["LastModifyDate"];
+		}
+
+		public static string GetShortDirName(string pathToFolder)
+		{
+			string shortName = pathToFolder.Substring(pathToFolder.LastIndexOf("\\") + 1);
+			return shortName;
 		}
 
 		public LegalCase() { }
