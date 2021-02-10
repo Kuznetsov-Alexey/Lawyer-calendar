@@ -17,13 +17,17 @@ namespace Lawyer_calendar
 	{
 		public LegalCase(DataRow dataRow)
 		{
+			this.CaseID = (int)dataRow["ID"];
 			this.PathToDir = dataRow["FolderAddress"].ToString();
 			this.WorkerName = dataRow["WorkerName"].ToString();
 			this.ExpirationDate = (DateTime)dataRow["ExpDate"];
 			this.Commentary = dataRow["Commentary"].ToString();
 			this.LastModifyName = dataRow["LastModifyName"].ToString();
 			this.LastModifyDate = (DateTime)dataRow["LastModifyDate"];
+			this.CaseStatusStr = dataRow["Status"].ToString();
 		}
+
+		public int CaseID { get; set; }
 
 		public static string GetShortDirName(string pathToFolder)
 		{
