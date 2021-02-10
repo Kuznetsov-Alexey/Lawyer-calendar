@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -62,18 +59,12 @@ namespace Lawyer_calendar
 
 			if(dataTable.Rows.Count > 0)
 			{
-				DataRow dataRow = dataTable.Rows[0];
-				DateTime ExpirationDate = (DateTime)dataRow["ExpDate"];
-				
+				DataRow dataRow = dataTable.Rows[0];				
 				LegalCase legalCase = new LegalCase(dataRow);
-				
-				string caseStatus = dataRow["Status"].ToString();
 
-				using (FormManagement form = new FormManagement(ExpirationDate))
+				using (FormManagement form = new FormManagement())
 				{
-					form.CaseId = (int)dataRow["ID"];
-					form.SetFormValues(legalCase, caseStatus);
-					
+					form.SetFormValues(legalCase);					
 					await Task.Run(() => form.ShowDialog());
 				}
 			}

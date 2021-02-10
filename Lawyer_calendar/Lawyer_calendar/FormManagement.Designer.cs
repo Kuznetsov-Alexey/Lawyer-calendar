@@ -251,8 +251,7 @@
 			this.Controls.Add(this.label1);
 			this.Name = "FormManagement";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Управление записями";
-			this.Load += new System.EventHandler(this.FormManagement_Load);
+			this.Text = "Управление записями";			
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

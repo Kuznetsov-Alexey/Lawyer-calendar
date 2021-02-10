@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Lawyer_calendar
@@ -22,36 +15,61 @@ namespace Lawyer_calendar
 		private bool dataWasSaved = false;
 
 		private int caseID;
-		private DataTable dataTable;
+		private DataTable shownDataTable;
+		private DataTable comparedDataTable;
 
-		public FormCaseChronology(int caseId, string caseName)
+		public FormCaseChronology(int caseID, string caseName)
 		{
 			InitializeComponent();
 
-			this.caseID = caseId;
+			this.caseID = caseID;
 			this.Text = caseName;
 
 			dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 			dataGridView1.AllowUserToAddRows = false;
 
-			string sqlRequestStr = $"SELECT * from lawyer_event_table WHERE caseID ='{caseId}' ";
-			dataTable = SqlConnector.ConvertQueryToDataTable(sqlRequestStr);
+			string sqlRequestStr = $"SELECT * from lawyer_event_table WHERE caseID ='{this.caseID}' ";
+			shownDataTable = SqlConnector.ConvertQueryToDataTable(sqlRequestStr);
+			comparedDataTable = SqlConnector.ConvertQueryToDataTable(sqlRequestStr);
 
+			dataGridView1.DataSource = shownDataTable;
+			shownDataTable.Columns["eventDesc"].ColumnName = "Описание события";
 
-			dataGridView1.DataSource = dataTable;
-			// делаем недоступным столбец id для изменения			
 			dataGridView1.Columns["caseID"].Visible = false;
+			dataGridView1.Columns["Описание события"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;			
+		}
 
-			dataGridView1.Columns["eventDesc"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+		private bool IsDataModified()
+		{
+			bool isModified = false;
+
+			string sqlRequestStr = $"SELECT * from lawyer_event_table WHERE caseID ='{caseID}' ";
+			DataTable dataTable = SqlConnector.ConvertQueryToDataTable(sqlRequestStr);
+
+			if (dataTable != this.comparedDataTable)
+			{
+				isModified = true;
+			}
+			return isModified;
 		}
 
 		private void buttonSaveChanges_Click(object sender, EventArgs e)
 		{
 
-			string commandSqlString = $"DELETE from lawyer_event_table WHERE caseID='{caseID}'";
-			bool isSuccess = SqlConnector.SqlInsertUpdateDelete(commandSqlString);
+			if (IsDataModified())
+			{
+				MessageBox.Show("Во время работы данные были изменены другим пользователем\nЗаново откройте данное окно", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				this.dataWasUpdated = false;
+				this.Close();
+				return;
+			}
 
-			foreach (DataRow row in dataTable.Rows)
+			shownDataTable.Columns["Описание события"].ColumnName = "eventDesc";
+
+			string commandSqlString = $"DELETE from lawyer_event_table WHERE caseID='{caseID}'";
+			bool isSuccess = SqlConnector.SqlInsertUpdateDelete(commandSqlString);							
+
+			foreach (DataRow row in shownDataTable.Rows)
 			{
 				string addedEvent = row.Field<string>("eventDesc");
 				commandSqlString = $"INSERT into lawyer_event_table (caseID, eventDesc) VALUES ('{caseID}', '{addedEvent}')";
@@ -68,9 +86,9 @@ namespace Lawyer_calendar
 
 		private void buttonAddEvent_Click(object sender, EventArgs e)
 		{
-			DataRow row = dataTable.NewRow(); // добавляем новую строку в DataTable
+			DataRow row = shownDataTable.NewRow(); // добавляем новую строку в DataTable
 			row.SetField<int>(0, caseID);
-			dataTable.Rows.Add(row);
+			shownDataTable.Rows.Add(row);
 		}
 
 		private void FormCaseChronology_Closing(object sender, FormClosingEventArgs e)
@@ -88,7 +106,6 @@ namespace Lawyer_calendar
 		{
 			this.dataWasUpdated = true;
 		}
-
 
 		private void buttonDeleteEvent_Click(object sender, EventArgs e)
 		{
