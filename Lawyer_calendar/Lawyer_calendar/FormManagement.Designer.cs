@@ -105,7 +105,8 @@
 			this.comboBoxCaseStatus.Items.AddRange(new object[] {
             "В работе",
             "Готово к показу",
-            "В архиве"});
+            "В архиве",
+            "Нет статуса"});
 			this.comboBoxCaseStatus.Location = new System.Drawing.Point(293, 140);
 			this.comboBoxCaseStatus.Name = "comboBoxCaseStatus";
 			this.comboBoxCaseStatus.Size = new System.Drawing.Size(253, 21);
@@ -251,7 +252,7 @@
 			this.Controls.Add(this.label1);
 			this.Name = "FormManagement";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Управление записями";			
+			this.Text = "Управление записями";
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

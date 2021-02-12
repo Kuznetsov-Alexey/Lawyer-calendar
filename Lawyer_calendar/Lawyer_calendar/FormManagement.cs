@@ -44,6 +44,7 @@ namespace Lawyer_calendar
 		public FormManagement(DateTime chosenDate)
 		{
 			InitializeComponent();
+			this.buttonShowChronology.Enabled = false;
 			this.dateTimePickerExpirationDate.Value = chosenDate;
 			this.Text = "Добавление новой записи";
 
@@ -169,6 +170,10 @@ namespace Lawyer_calendar
 
 		private LegalCase GetFormValues()
 		{
+			if (comboBoxCaseStatus.SelectedItem == null)
+				comboBoxCaseStatus.SelectedIndex = 3;
+
+
 			LegalCase singleCase = new LegalCase();
 			singleCase.WorkerName = textBoxWorkerName.Text;
 			singleCase.ExpirationDate = dateTimePickerExpirationDate.Value;
@@ -176,7 +181,8 @@ namespace Lawyer_calendar
 			singleCase.PathToDir = pathToDirectory.Replace("\\", "\\\\");
 			singleCase.Commentary = textBoxCommentary.Text;
 			singleCase.LastModifyDate = DateTime.Today;
-			singleCase.LastModifyName = Environment.UserName;
+			singleCase.LastModifyName = System.Net.Dns.GetHostName();
+			//singleCase.LastModifyName = Environment.UserName;
 			//singleCase.LastModifyName = GetUserNameDict(Environment.UserName);
 
 			return singleCase;

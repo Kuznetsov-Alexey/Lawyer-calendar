@@ -44,7 +44,7 @@ namespace Lawyer_calendar
 				DateTime chosenDate = new DateTime(currentDate.Year, currentDate.Month, (int)senderPanel.Tag);
 
 				using (FormManagement form = new FormManagement(chosenDate))
-				{
+				{					
 					form.ShowDialog();
 				}
 				DisplayCurrentDate();
@@ -93,6 +93,7 @@ namespace Lawyer_calendar
 				link.Name = $"link{row["ID"].ToString()}";
 				link.Tag = row["ID"];
 				link.Click += new System.EventHandler(this.ShowCaseDetails);
+				link.AutoSize = true;
 
 				link.Text = LegalCase.GetShortDirName(row["FolderAddress"].ToString());
 
