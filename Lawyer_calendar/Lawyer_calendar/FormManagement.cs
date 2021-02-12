@@ -111,12 +111,12 @@ namespace Lawyer_calendar
 			}
 			else
 			{
-				if (IsDataModified())
-				{
-					MessageBox.Show("Во время работы данные были изменены другим пользователем\nЗаново откройте запись", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					this.Close();
-					return;
-				}
+				//if (IsDataModified())
+				//{
+				//	MessageBox.Show("Во время работы данные были изменены другим пользователем\nЗаново откройте запись", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				//	this.Close();
+				//	return;
+				//}
 
 				if (IsConfirm("Хотите обновить текущую запись?"))
 				{

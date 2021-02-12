@@ -47,6 +47,7 @@
 			this.label8 = new System.Windows.Forms.Label();
 			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
 			this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+			this.buttonPrint = new System.Windows.Forms.Button();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -56,6 +57,7 @@
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.buttonPrint);
 			this.panel1.Controls.Add(this.labelMonthAndYear);
 			this.panel1.Controls.Add(this.panel2);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -260,6 +262,15 @@
 			this.linkLabel2.TabStop = true;
 			this.linkLabel2.Text = "Single case 2";
 			// 
+			// buttonPrint
+			// 
+			this.buttonPrint.Location = new System.Drawing.Point(556, 32);
+			this.buttonPrint.Name = "buttonPrint";
+			this.buttonPrint.Size = new System.Drawing.Size(101, 27);
+			this.buttonPrint.TabIndex = 2;
+			this.buttonPrint.Text = "Распечатать";
+			this.buttonPrint.UseVisualStyleBackColor = true;			
+			// 
 			// FormDisplayCases
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -305,5 +316,6 @@
 		private System.Windows.Forms.LinkLabel linkLabel1;
 		private System.Windows.Forms.LinkLabel linkLabel2;
 		private System.Windows.Forms.Button buttonCurrentMonth;
+		private System.Windows.Forms.Button buttonPrint;
 	}
 }

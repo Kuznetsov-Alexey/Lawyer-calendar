@@ -56,13 +56,13 @@ namespace Lawyer_calendar
 		private void buttonSaveChanges_Click(object sender, EventArgs e)
 		{
 
-			if (IsDataModified())
-			{
-				MessageBox.Show("Во время работы данные были изменены другим пользователем\nЗаново откройте данное окно", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-				this.dataWasUpdated = false;
-				this.Close();
-				return;
-			}
+			//if (IsDataModified())
+			//{
+			//	MessageBox.Show("Во время работы данные были изменены другим пользователем\nЗаново откройте данное окно", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			//	this.dataWasUpdated = false;
+			//	this.Close();
+			//	return;
+			//}
 
 			shownDataTable.Columns["Описание события"].ColumnName = "eventDesc";
 

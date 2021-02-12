@@ -12,7 +12,14 @@ namespace Lawyer_calendar
 		public FormDisplayCases()
 		{
 			InitializeComponent();
+		}
 
+		//список календарных дней
+		private List<FlowLayoutPanel> listFlowDays = new List<FlowLayoutPanel>();
+		private DateTime currentDate = DateTime.Today;		
+
+		private void FormDisplayCases_Load(object sender, EventArgs e)
+		{
 			try
 			{
 				SqlConnector.SqlConnect();
@@ -20,21 +27,15 @@ namespace Lawyer_calendar
 			catch (Exception ex)
 			{
 				MessageBox.Show("Ошибка подключения к базе данных\n" + ex.Message);
+				this.Close();
+				return;
 			}
-		}
 
-
-		//список календарных дней
-		private List<FlowLayoutPanel> listFlowDays = new List<FlowLayoutPanel>();
-		private DateTime currentDate = DateTime.Today;
-
-		private void FormDisplayCases_Load(object sender, EventArgs e)
-		{
 			GenerateDayPanel(42);
 			DisplayCurrentDate();
 		}
 
-		private async void AddNewCase(object sender, EventArgs e)
+		private void AddNewCase(object sender, EventArgs e)
 		{
 			FlowLayoutPanel senderPanel = (FlowLayoutPanel)sender;
 
@@ -44,13 +45,13 @@ namespace Lawyer_calendar
 
 				using (FormManagement form = new FormManagement(chosenDate))
 				{
-					await Task.Run(() => form.ShowDialog());
+					form.ShowDialog();
 				}
 				DisplayCurrentDate();
 			}
 		}
 
-		private async void ShowCaseDetails(object sender, EventArgs e)
+		private void ShowCaseDetails(object sender, EventArgs e)
 		{
 			LinkLabel senderLabel = (LinkLabel)sender;
 			int caseID = (int)senderLabel.Tag;
@@ -65,7 +66,7 @@ namespace Lawyer_calendar
 				using (FormManagement form = new FormManagement())
 				{
 					form.SetFormValues(legalCase);					
-					await Task.Run(() => form.ShowDialog());
+					form.ShowDialog();
 				}
 			}
 			DisplayCurrentDate();
