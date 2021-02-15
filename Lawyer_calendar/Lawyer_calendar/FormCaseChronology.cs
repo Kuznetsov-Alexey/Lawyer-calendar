@@ -15,8 +15,9 @@ namespace Lawyer_calendar
 		private bool dataWasSaved = false;
 
 		private int caseID;
-		private DataTable shownDataTable;
-		private DataTable comparedDataTable;
+		private DataTable shownDataTable;		
+
+		private DataRow[] dataComparedRowArray;
 
 		public FormCaseChronology(int caseID, string caseName)
 		{
@@ -30,7 +31,17 @@ namespace Lawyer_calendar
 
 			string sqlRequestStr = $"SELECT * from lawyer_event_table WHERE caseID ='{this.caseID}' ";
 			shownDataTable = SqlConnector.ConvertQueryToDataTable(sqlRequestStr);
-			comparedDataTable = SqlConnector.ConvertQueryToDataTable(sqlRequestStr);
+
+			dataComparedRowArray = new DataRow[shownDataTable.Rows.Count];
+			shownDataTable.Rows.CopyTo(dataComparedRowArray, 0);
+
+			//comparedDataTable = SqlConnector.ConvertQueryToDataTable(sqlRequestStr);
+
+
+			//bool equal = DataTable.Equals(shownDataTable, comparedDataTable);
+
+			//if (shownDataTable != comparedDataTable)
+			//	return;
 
 			dataGridView1.DataSource = shownDataTable;
 			shownDataTable.Columns["eventDesc"].ColumnName = "Описание события";
@@ -39,30 +50,51 @@ namespace Lawyer_calendar
 			dataGridView1.Columns["Описание события"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;			
 		}
 
+		//проверка БД на изменение
 		private bool IsDataModified()
 		{
 			bool isModified = false;
 
-			string sqlRequestStr = $"SELECT * from lawyer_event_table WHERE caseID ='{caseID}' ";
+			string sqlRequestStr = $"SELECT * from lawyer_event_table WHERE caseID ='{this.caseID}' ";
 			DataTable dataTable = SqlConnector.ConvertQueryToDataTable(sqlRequestStr);
 
-			if (dataTable != this.comparedDataTable)
+			DataRow[] testedRows = new DataRow[dataTable.Rows.Count];
+			dataTable.Rows.CopyTo(testedRows, 0);
+
+			if (!AreRowsEqual(testedRows, dataComparedRowArray))
 			{
 				isModified = true;
 			}
 			return isModified;
 		}
 
+		//сравнение строк полученных из БД и сохраненных в начале сессии
+		private bool AreRowsEqual(DataRow[] first, DataRow[] second)
+		{
+			bool rowsEqual = true;
+
+			if (first.Length != second.Length)
+				return false;
+					   
+			for(int i = 0; i < first.Length; i++)
+			{				
+				if(object.Equals(first[i].ItemArray, second[i].ItemArray))
+					rowsEqual = false;				
+			}
+
+			return rowsEqual;
+		}
+
 		private void buttonSaveChanges_Click(object sender, EventArgs e)
 		{
 
-			//if (IsDataModified())
-			//{
-			//	MessageBox.Show("Во время работы данные были изменены другим пользователем\nЗаново откройте данное окно", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-			//	this.dataWasUpdated = false;
-			//	this.Close();
-			//	return;
-			//}
+			if (IsDataModified())
+			{
+				MessageBox.Show("Во время работы данные были изменены другим пользователем\nЗаново откройте данное окно", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				this.dataWasUpdated = false;
+				this.Close();
+				return;
+			}
 
 			shownDataTable.Columns["Описание события"].ColumnName = "eventDesc";
 

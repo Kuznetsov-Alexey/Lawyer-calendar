@@ -53,9 +53,11 @@ namespace Lawyer_calendar
 		public int CaseID = 0;
 		private string pathToDirectory = "";
 		private LegalCase defaultLegalCase;
+		
 
 		public void SetFormValues(LegalCase legalCase)
 		{
+					
 			this.CaseID = legalCase.CaseID;
 			this.Text = LegalCase.GetShortDirName(legalCase.PathToDir);
 			this.textBoxWorkerName.Text = legalCase.WorkerName;
@@ -67,6 +69,7 @@ namespace Lawyer_calendar
 			this.linkLabelOpenFolder.Visible = true;
 			this.labelLastModifyInfo.Text = legalCase.LastModifyName + "    :    " + legalCase.LastModifyDate.ToShortDateString();
 			this.defaultLegalCase = legalCase;
+
 		}
 
 		private void buttonDeleteCase_Click(object sender, EventArgs e)
@@ -112,12 +115,12 @@ namespace Lawyer_calendar
 			}
 			else
 			{
-				//if (IsDataModified())
-				//{
-				//	MessageBox.Show("Во время работы данные были изменены другим пользователем\nЗаново откройте запись", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-				//	this.Close();
-				//	return;
-				//}
+				if (IsDataModified())
+				{
+					MessageBox.Show("Во время работы данные были изменены другим пользователем\nЗаново откройте запись", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					this.Close();
+					return;
+				}
 
 				if (IsConfirm("Хотите обновить текущую запись?"))
 				{
@@ -138,6 +141,7 @@ namespace Lawyer_calendar
 			}
 		}
 
+		//проверка базы данных на изменение записи
 		private bool IsDataModified()
 		{
 			bool isModified = false;
@@ -147,11 +151,31 @@ namespace Lawyer_calendar
 			DataRow dataRow = dataTable.Rows[0];
 			LegalCase comparedLegalCase = new LegalCase(dataRow);
 
-			if (comparedLegalCase != this.defaultLegalCase)
+			if (!AreCaseFieldsEqual(comparedLegalCase, this.defaultLegalCase))
 			{
 				isModified = true;
 			}
 			return isModified;
+		}
+
+		//сравнение двух классов, заполенных данными их БД
+		private bool AreCaseFieldsEqual(LegalCase first, LegalCase second)
+		{
+			bool fieldsEqual = true;
+
+			if (first.CaseStatusStr != second.CaseStatusStr)
+				fieldsEqual = false;
+
+			if (first.WorkerName != second.WorkerName)
+				fieldsEqual = false;
+
+			if (first.PathToDir != second.PathToDir)
+				fieldsEqual = false;
+
+			if (first.Commentary != second.Commentary)
+				fieldsEqual = false;
+
+			return fieldsEqual;
 		}
 
 		private void buttonChooseFolder_Click(object sender, EventArgs e)
@@ -213,5 +237,6 @@ namespace Lawyer_calendar
 				this.Visible = true;
 			}
 		}
+
 	}
 }
