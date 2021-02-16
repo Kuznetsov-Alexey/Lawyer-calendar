@@ -37,7 +37,6 @@ namespace Lawyer_calendar
 
 			sqlAdapter.Fill(dataSet);
 			return dataSet.Tables[0];
-
 		}
 	}
 }

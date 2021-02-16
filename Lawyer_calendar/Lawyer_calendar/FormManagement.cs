@@ -7,35 +7,6 @@ namespace Lawyer_calendar
 {
 	public partial class FormManagement : Form
 	{
-		#region Dictionary Searching
-		//private readonly Dictionary<string, string> userNamesDict = new Dictionary<string, string> 
-		//{
-		//	{"", ""},
-		//	{"", ""},
-		//	{"", ""},
-		//	{"", ""}
-		//};
-
-		//private string GetUserNameDict(string dnsName)
-		//{
-		//	dnsName = dnsName.Trim();
-		//	string fullName = "";
-		//	foreach(KeyValuePair<string, string> pair in userNamesDict)
-		//	{
-		//		if(dnsName == pair.Key)
-		//		{
-		//			fullName = pair.Value;
-		//		}
-		//	}
-
-		//	if (fullName == "")
-		//		return dnsName;
-		//	else
-		//		return fullName;
-		//}
-		#endregion
-
-
 		public FormManagement()
 		{
 			InitializeComponent();			
@@ -197,7 +168,6 @@ namespace Lawyer_calendar
 			if (comboBoxCaseStatus.SelectedItem == null)
 				comboBoxCaseStatus.SelectedIndex = 3;
 
-
 			LegalCase singleCase = new LegalCase();
 			singleCase.WorkerName = textBoxWorkerName.Text;
 			singleCase.ExpirationDate = dateTimePickerExpirationDate.Value;
@@ -205,11 +175,29 @@ namespace Lawyer_calendar
 			singleCase.PathToDir = pathToDirectory.Replace("\\", "\\\\");
 			singleCase.Commentary = textBoxCommentary.Text;
 			singleCase.LastModifyDate = DateTime.Today;
-			singleCase.LastModifyName = System.Net.Dns.GetHostName();
+			singleCase.LastModifyName = GetUserNameFromDB(System.Net.Dns.GetHostName());
+				
+				
+				
+				
 			//singleCase.LastModifyName = Environment.UserName;
 			//singleCase.LastModifyName = GetUserNameDict(Environment.UserName);
 
 			return singleCase;
+		}
+
+		private string GetUserNameFromDB(string hostName)
+		{
+			string realName = "";
+
+			string sqlRequestStr = $"SELECT FIO from users_names WHERE dnsName ='{hostName}' ";
+			DataTable dataTable = SqlConnector.ConvertQueryToDataTable(sqlRequestStr);			
+
+			if(dataTable.Rows.Count > 0)
+			{
+				realName = dataTable.Rows[0].Field<string>("FIO");
+			}
+			return realName;
 		}
 
 		private void linkLabelOpenFolder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
