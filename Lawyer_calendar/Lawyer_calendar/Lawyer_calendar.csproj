@@ -40,8 +40,9 @@
     </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Overtime-80_icon-icons.com_57296.ico</ApplicationIcon>
+    <ApplicationIcon>calendar-icon_34471.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="Costura, Version=5.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.5.0.2\lib\netstandard1.0\Costura.dll</HintPath>
@@ -247,6 +248,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="calendar-icon_34471.ico" />
     <Content Include="Overtime-80_icon-icons.com_57296.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

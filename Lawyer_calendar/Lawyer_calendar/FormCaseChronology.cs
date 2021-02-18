@@ -99,7 +99,9 @@ namespace Lawyer_calendar
 			shownDataTable.Columns["Описание события"].ColumnName = "eventDesc";
 
 			string commandSqlString = $"DELETE from lawyer_event_table WHERE caseID='{caseID}'";
-			bool isSuccess = SqlConnector.SqlInsertUpdateDelete(commandSqlString);							
+			bool isSuccess = SqlConnector.SqlInsertUpdateDelete(commandSqlString);
+
+			this.Hide();
 
 			foreach (DataRow row in shownDataTable.Rows)
 			{
@@ -113,6 +115,7 @@ namespace Lawyer_calendar
 				MessageBox.Show("Данные не добавлены");
 
 			dataWasSaved = true;
+			this.DialogResult = DialogResult.Yes;
 			this.Close();
 		}
 

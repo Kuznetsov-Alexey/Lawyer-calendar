@@ -47,9 +47,13 @@ namespace Lawyer_calendar
 		{
 			if (IsConfirm("Удалить выбранную запись"))
 			{
-				string commandSqlString = $"DELETE from lawyer_calendar_table WHERE ID = '{CaseID}'";
+				string commandSqlStringCalendar = $"DELETE from lawyer_calendar_table WHERE ID = '{CaseID}'";
 
-				if (SqlConnector.SqlInsertUpdateDelete(commandSqlString))
+				string commandSqlStringEvents = $"DELETE from lawyer_event_table WHERE caseID = '{CaseID}'";
+				SqlConnector.SqlInsertUpdateDelete(commandSqlStringEvents);
+
+
+				if (SqlConnector.SqlInsertUpdateDelete(commandSqlStringCalendar))
 					MessageBox.Show("Запись удалена");
 
 				else
@@ -190,7 +194,7 @@ namespace Lawyer_calendar
 		{
 			string realName = "";
 
-			string sqlRequestStr = $"SELECT FIO from users_names WHERE dnsName ='{hostName}' ";
+			string sqlRequestStr = $"SELECT FIO from lawyer_names WHERE dnsName ='{hostName}' ";
 			DataTable dataTable = SqlConnector.ConvertQueryToDataTable(sqlRequestStr);			
 
 			if(dataTable.Rows.Count > 0)
@@ -221,7 +225,7 @@ namespace Lawyer_calendar
 			using (FormCaseChronology form = new FormCaseChronology(CaseID, this.Text))
 			{
 				this.Visible = false;
-				form.ShowDialog();
+				DialogResult result =  form.ShowDialog();
 				this.Visible = true;
 			}
 		}

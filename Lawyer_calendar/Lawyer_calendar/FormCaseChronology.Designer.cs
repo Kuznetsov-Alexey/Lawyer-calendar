@@ -40,14 +40,14 @@
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView1.Location = new System.Drawing.Point(12, 12);
 			this.dataGridView1.Name = "dataGridView1";
-			this.dataGridView1.Size = new System.Drawing.Size(597, 337);
+			this.dataGridView1.Size = new System.Drawing.Size(654, 369);
 			this.dataGridView1.TabIndex = 0;
 			this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.FormCaseChronology_CellValueChanged);
 			// 
 			// buttonAddEvent
 			// 
 			this.buttonAddEvent.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonAddEvent.Location = new System.Drawing.Point(34, 374);
+			this.buttonAddEvent.Location = new System.Drawing.Point(54, 407);
 			this.buttonAddEvent.Name = "buttonAddEvent";
 			this.buttonAddEvent.Size = new System.Drawing.Size(121, 39);
 			this.buttonAddEvent.TabIndex = 1;
@@ -58,7 +58,7 @@
 			// buttonSaveChanges
 			// 
 			this.buttonSaveChanges.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonSaveChanges.Location = new System.Drawing.Point(258, 374);
+			this.buttonSaveChanges.Location = new System.Drawing.Point(278, 407);
 			this.buttonSaveChanges.Name = "buttonSaveChanges";
 			this.buttonSaveChanges.Size = new System.Drawing.Size(121, 39);
 			this.buttonSaveChanges.TabIndex = 2;
@@ -69,30 +69,31 @@
 			// buttonDeleteEvent
 			// 
 			this.buttonDeleteEvent.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonDeleteEvent.Location = new System.Drawing.Point(472, 374);
+			this.buttonDeleteEvent.Location = new System.Drawing.Point(492, 407);
 			this.buttonDeleteEvent.Name = "buttonDeleteEvent";
 			this.buttonDeleteEvent.Size = new System.Drawing.Size(121, 39);
 			this.buttonDeleteEvent.TabIndex = 3;
 			this.buttonDeleteEvent.Text = "Удалить";
 			this.buttonDeleteEvent.UseVisualStyleBackColor = true;
 			this.buttonDeleteEvent.Click += new System.EventHandler(this.buttonDeleteEvent_Click);
-			
 			// 
 			// FormCaseChronology
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(621, 436);
+			this.ClientSize = new System.Drawing.Size(680, 474);
 			this.Controls.Add(this.buttonDeleteEvent);
 			this.Controls.Add(this.buttonSaveChanges);
 			this.Controls.Add(this.buttonAddEvent);
 			this.Controls.Add(this.dataGridView1);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Name = "FormCaseChronology";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "FormCaseChronologyView";			
+			this.Text = "FormCaseChronologyView";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormCaseChronology_Closing);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
-			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormCaseChronology_Closing);
+
 		}
 
 		#endregion
