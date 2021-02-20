@@ -19,10 +19,10 @@ namespace Lawyer_calendar
 		{
 			this.CaseID = (int)dataRow["ID"];
 			this.PathToDir = dataRow["FolderAddress"].ToString();
-			this.WorkerName = dataRow["WorkerName"].ToString();
+			this.WorkerID = (int)dataRow["WorkerID"];
 			this.ExpirationDate = (DateTime)dataRow["ExpDate"];
 			this.Commentary = dataRow["Commentary"].ToString();
-			this.LastModifyName = dataRow["LastModifyName"].ToString();
+			this.LastModifyID = (int)dataRow["LastModifyID"];
 			this.LastModifyDate = (DateTime)dataRow["LastModifyDate"];
 			this.CaseStatusStr = dataRow["Status"].ToString();
 		}
@@ -37,13 +37,13 @@ namespace Lawyer_calendar
 
 		public LegalCase() { }
 
-		public string WorkerName { get; set; }		
+		public int WorkerID { get; set; }
 
 		public string PathToDir { get; set; }
 
 		public string Commentary { get; set; }
 
-		public string LastModifyName { get; set; }
+		public int LastModifyID { get; set; }
 
 		public DateTime LastModifyDate { get; set; }
 
@@ -56,7 +56,7 @@ namespace Lawyer_calendar
 			}
 		}
 
-		private CaseStatus caseStatus { get; set; }
+		internal CaseStatus caseStatus { get; set; }
 
 		public string CaseStatusStr
 		{
@@ -104,8 +104,9 @@ namespace Lawyer_calendar
 		public string ExpirationDateStr
 		{
 			get
-			{				
-				string expDateString = ExpirationDate.Year + "." + ExpirationDate.Month + "." + ExpirationDate.Day;
+			{
+				
+				string expDateString = ExpirationDate.ToString("yyyy.MM.dd hh:mm:ss");
 				return expDateString;
 			}
 		}
